@@ -26,7 +26,6 @@
   <div class="hero-wrapper">
     <?php include __DIR__. '/../components/nav.php'; ?>
     <main>
-      <h1>HHHHHHHHHHHHHHHHH</h1>
       <h1 class="hero-title">
         JAWLAH<span class="dot-accent">.</span>
       </h1>
