@@ -191,7 +191,7 @@
     width: 230px;
     height: 100vh;
     height: 100dvh;
-    gap: 5px;
+    gap: 10px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
