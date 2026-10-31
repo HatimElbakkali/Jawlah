@@ -21,6 +21,7 @@
     rel="stylesheet">
 
   <link rel="stylesheet" href="/public/css/about-us.css">
+  <link rel="stylesheet" href="/public/css/nav.css">
   <meta name="theme-color" content="#231709">
 </head>
 

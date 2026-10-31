@@ -1,20 +1,25 @@
 <?php
-$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$uri = rtrim((string) parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/') ?: '/';
 ?>
 
-<nav class="navbar">
+<nav class="navbar <?= !empty($navOverlay) ? 'navbar--overlay' : '' ?>">
     <a href="/" aria-label="Jawlah Home">
         <div class="glass-logo-bg">
             <img
                 class="nav-logo"
                 src="/public/assets/Logo/Jawlah.webp"
-                alt="Jawlah Logo"
-                loading="lazy">
+                alt="Jawlah Logo">
         </div>
     </a>
 
     <div class="nav-content">
-        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle Navigation">
+        <button
+            type="button"
+            class="nav-toggle"
+            id="nav-toggle"
+            aria-label="Toggle Navigation"
+            aria-controls="nav-menu"
+            aria-expanded="false">
             <span class="bar"></span>
             <span class="bar"></span>
         </button>
@@ -23,7 +28,7 @@ $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
             <a
                 href="/"
-                class="nav-link org <?= $uri === '/' ? 'active' : '' ?>">
+                class="nav-link <?= $uri === '/' ? 'active' : '' ?>">
                 Home
             </a>
 

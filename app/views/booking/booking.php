@@ -3,6 +3,7 @@
 <html lang="en">
 
 <head>
+
   <?php require_once __DIR__ . '/../components/head.php' ?>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,6 +15,7 @@
     href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Amiri+Quran&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="/public/css/booking.css">
+  <link rel="stylesheet" href="/public/css/nav.css">
   <link rel="shortcut icon" href="/public/assets/Logo/favicon.ico" />
   <link rel="icon" type="image/png" sizes="16x16" href="/public/assets/Logo/favicon-16.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="/public/assets/Logo/favicon-32.png" />
@@ -21,13 +23,12 @@
   <link rel="icon" type="image/png" sizes="64x64" href="/public/assets/Logo/favicon-64.png" />
   <link rel="icon" type="image/png" sizes="128x128" href="/public/assets/Logo/favicon-128.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="/public/assets/Logo/apple-touch-icon.png" />
-
 </head>
 
 <body>
 
   <div class="overlay" id="overlay"></div>
-  <?php include __DIR__ . '/../components/nav.php'; ?>
+  <?php require_once __DIR__ . '/../components/nav.php'; ?>
 
   <div class="step-indicator-wrapper">
     <div class="step-indicator-container">
@@ -66,6 +67,7 @@
         </div>
         <span class="step-title">Duration</span>
       </div>
+
 
       <div class="step-connector"></div>
 

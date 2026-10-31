@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>JAWLAH – Contact</title>
   <link rel="stylesheet" href="/public/css/contact-us.css" />
+  <link rel="stylesheet" href="/public/css/nav.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -24,18 +25,20 @@
 
 <body>
   <div class="overlay" id="overlay"></div>
+  <?php $navOverlay = true; ?>
   <?php include __DIR__ . '/../components/nav.php'; ?>
   <header class="hero">
     <div class="hero__bg"></div>
     <div class="hero__overlay"></div>
     <div class="hero__content">
-      <h1 class="hero__title animate-hero-title">Contact</h1>
-      <p class="hero__subtitle animate-hero-subtitle">
-        What are you waiting for? Let's build your Journey together.
-      </p>
-    </div>
-    <div class="hero__arrow animate-hero-arrow">
-      <a href="#contact99"><img class=" " src="/public/assets/Icons/arrow-down-return.svg" alt="Scroll down" /></a>
+      <div class="hero__text">
+        <h1 class="hero__title animate-hero-title">Contact</h1>
+        <p class="hero__subtitle animate-hero-subtitle">What are you waiting for? Let's build your Journey together.</p>
+        <div class="hero__arrow animate-hero-arrow">
+          <a href="#contact99"><img class=" " src="/public/assets/Icons/arrow-down-return.svg" alt="Scroll down" /></a>
+        </div>
+        <!-- <svg class="hero__arrow animate-hero-arrow" ...>...</svg> -->
+      </div>
     </div>
   </header>
 
@@ -204,4 +207,5 @@
   <script type="module" src="/public/js/scroll.js" defer></script>
   <script src="/public/js/nav-toggle.js" defer></script>
 </body>
+
 </html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <?php require_once __DIR__ . '/../components/head.php' ?>
   <meta charset="UTF-8" />
@@ -13,7 +14,12 @@
   <link
     href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Amiri+Quran&display=swap"
     rel="stylesheet">
+    
+  <!-- Style -->
   <link rel="stylesheet" href="/public/css/tour.css" />
+  <link rel="stylesheet" href="/public/css/nav.css">
+  <!-- Style -->
+
   <link rel="shortcut icon" href="/public/assets/Logo/favicon.ico" />
   <link rel="icon" type="image/png" sizes="16x16" href="/public/assets/Logo/favicon-16.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="/public/assets/Logo/favicon-32.png" />
@@ -28,7 +34,8 @@
   <div class="overlay" id="overlay"></div>
 
   <div class="page-wrapper">
-    <?php include __DIR__. '/../components/nav.php'; ?>
+  <?php $navOverlay = true; ?>
+  <?php require_once __DIR__ . '/../components/nav.php'; ?>
 
     <div class="hero-bg">
       <section class="hero-section">
@@ -81,21 +88,67 @@
         <h2 id="slide" class="section-heading">Desert Adventure Activities</h2>
       </div>
 
-      <?php foreach ($DesertActivities as $DesertActivity):?>
-      <div class="activity-row">
-        <div class="activity-media">
-          <img class="activity-img" src="<?= $DesertActivity['image'] ?>" alt="Camel Riding" loading="lazy" />
-        </div>
-        <div class="activity-info">
-          <div class="info-row">
-            <h2 class="activity-title"><?= $DesertActivity['title'] ?></h2>
-            <img class="activity-title-icon" src="<?= $DesertActivity['icon_title'] ?>" alt="Camel icon" loading="lazy" />
+      <?php foreach ($DesertActivities as $DesertActivity): ?>
+        <div class="activity-row">
+          <div class="activity-media">
+            <img class="activity-img" src="<?= $DesertActivity['image'] ?>" alt="Camel Riding" loading="lazy" />
           </div>
-          <p class="activity-desc"><?= $DesertActivity['description'] ?></p>
+          <div class="activity-info">
+            <div class="info-row">
+              <h2 class="activity-title"><?= $DesertActivity['title'] ?></h2>
+              <img class="activity-title-icon" src="<?= $DesertActivity['icon_title'] ?>" alt="Camel icon" loading="lazy" />
+            </div>
+            <p class="activity-desc"><?= $DesertActivity['description'] ?></p>
+            <div class="activity-details">
+              <div class="info-row">
+                <img class="detail-icon" src="/public/assets/Icons/placeholder.png" alt="Location" loading="lazy" />
+                <p class="detail-text"><?= $DesertActivity['location'] ?></p>
+              </div>
+              <div class="info-row">
+                <img class="detail-icon" src="/public/assets/Icons/duration.png" alt="Duration" loading="lazy" />
+                <p class="detail-text">Up to 1 hour</p>
+              </div>
+              <div class="info-row">
+                <img class="detail-icon" src="/public/assets/Icons/group.png" alt="Group" loading="lazy" />
+                <p class="detail-text">Suitable for <?= $DesertActivity['age_restriction'] ?></p>
+              </div>
+              <div class="info-row">
+                <img class="detail-icon" src="/public/assets/Icons/guid.png" alt="Guide" loading="lazy" />
+                <p class="detail-text"><?= $DesertActivity['accompanied'] ?></p>
+              </div>
+              <div class="info-row">
+                <img class="detail-icon" src="/public/assets/Icons/money.png" alt="Price" loading="lazy" />
+                <p class="detail-text">30 minute - <?= $DesertActivity['price'] ?>$ ~ Price varies by duration</p>
+              </div>
+              <a href="/public/booking?id=<?= $DesertActivity['id'] ?>&type=activity" class="link-plain">
+                <button type="button" class="btn-book-now">
+                  <span class="btn-book-label">Book Now</span>
+                  <img class="icon-arrow-right" src="/public/assets/Icons/arrow-right.png" alt="Arrow right" loading="lazy" />
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+      <?php endforeach; ?>
+
+      <div class="section-activities-header">
+        <h2 class="section-heading">Desert Adventure Pack</h2>
+      </div>
+      <?php foreach ($desertActivitiesPacks as $desertActivitiesPack): ?>
+        <div class="pack-title-wrapper">
+          <h2 class="pack-title"><?= $desertActivitiesPack['title'] ?></h2>
+        </div>
+
+        <div class="pack-img-container">
+          <img class="image-pack" src="<?= $desertActivitiesPack['image'] ?>" alt="Desert Adventure Pack" loading="lazy" />
+        </div>
+
+        <div class="pack-info">
+          <p class="activity-desc"><?= $desertActivitiesPack['description'] ?></p>
           <div class="activity-details">
             <div class="info-row">
               <img class="detail-icon" src="/public/assets/Icons/placeholder.png" alt="Location" loading="lazy" />
-              <p class="detail-text"><?= $DesertActivity['location'] ?></p>
+              <p class="detail-text"><?= $desertActivitiesPack['location'] ?></p>
             </div>
             <div class="info-row">
               <img class="detail-icon" src="/public/assets/Icons/duration.png" alt="Duration" loading="lazy" />
@@ -103,76 +156,31 @@
             </div>
             <div class="info-row">
               <img class="detail-icon" src="/public/assets/Icons/group.png" alt="Group" loading="lazy" />
-              <p class="detail-text">Suitable for <?= $DesertActivity['age_restriction'] ?></p>
+              <p class="detail-text">Suitable for <?= $desertActivitiesPack['age_restriction'] ?></p>
             </div>
             <div class="info-row">
               <img class="detail-icon" src="/public/assets/Icons/guid.png" alt="Guide" loading="lazy" />
-              <p class="detail-text"><?= $DesertActivity['accompanied'] ?></p>
+              <p class="detail-text"><?= $desertActivitiesPack['accompanied'] ?>
+              </p>
             </div>
             <div class="info-row">
               <img class="detail-icon" src="/public/assets/Icons/money.png" alt="Price" loading="lazy" />
-              <p class="detail-text">30 minute - <?= $DesertActivity['price'] ?>$ ~ Price varies by duration</p>
+              <p class="detail-text"><?= $desertActivitiesPack['price'] ?>$ per person ~ Up to 20 minutes per activity</p>
             </div>
-            <a href="/public/booking?id=<?= $DesertActivity['id'] ?>&type=activity" class="link-plain">
-              <button type="button" class="btn-book-now">
+            <a href="/public/booking?id=<?= $desertActivitiesPack['id'] ?>&type=pack" class="link-plain">
+              <button type="button" class="btn-book-now" id="btn-book-pack">
                 <span class="btn-book-label">Book Now</span>
                 <img class="icon-arrow-right" src="/public/assets/Icons/arrow-right.png" alt="Arrow right" loading="lazy" />
               </button>
             </a>
           </div>
         </div>
-      </div>
-      <?php endforeach; ?>
-
-      <div class="section-activities-header">
-        <h2 class="section-heading">Desert Adventure Pack</h2>
-      </div>
-    <?php foreach ($desertActivitiesPacks as $desertActivitiesPack):?>
-      <div class="pack-title-wrapper">
-        <h2 class="pack-title"><?= $desertActivitiesPack['title'] ?></h2>
-      </div>
-
-      <div class="pack-img-container">
-        <img class="image-pack" src="<?= $desertActivitiesPack['image'] ?>" alt="Desert Adventure Pack" loading="lazy" />
-      </div>
-
-      <div class="pack-info">
-        <p class="activity-desc"><?= $desertActivitiesPack['description'] ?></p>
-        <div class="activity-details">
-          <div class="info-row">
-            <img class="detail-icon" src="/public/assets/Icons/placeholder.png" alt="Location" loading="lazy" />
-            <p class="detail-text"><?= $desertActivitiesPack['location'] ?></p>
-          </div>
-          <div class="info-row">
-            <img class="detail-icon" src="/public/assets/Icons/duration.png" alt="Duration" loading="lazy" />
-            <p class="detail-text">Up to 1 hour</p>
-          </div>
-          <div class="info-row">
-            <img class="detail-icon" src="/public/assets/Icons/group.png" alt="Group" loading="lazy" />
-            <p class="detail-text">Suitable for <?= $desertActivitiesPack['age_restriction'] ?></p>
-          </div>
-          <div class="info-row">
-            <img class="detail-icon" src="/public/assets/Icons/guid.png" alt="Guide" loading="lazy" />
-            <p class="detail-text"><?= $desertActivitiesPack['accompanied'] ?>
-            </p>
-          </div>
-          <div class="info-row">
-            <img class="detail-icon" src="/public/assets/Icons/money.png" alt="Price" loading="lazy" />
-            <p class="detail-text"><?= $desertActivitiesPack['price'] ?>$ per person ~ Up to 20 minutes per activity</p>
-          </div>
-          <a href="/public/booking?id=<?=$desertActivitiesPack['id']?>&type=pack" class="link-plain">
-            <button type="button" class="btn-book-now" id="btn-book-pack">
-              <span class="btn-book-label">Book Now</span>
-              <img class="icon-arrow-right" src="/public/assets/Icons/arrow-right.png" alt="Arrow right" loading="lazy" />
-            </button>
-          </a>
-        </div>
-      </div>
       <?php endforeach; ?>
     </div>
   </div>
-  <?php include __DIR__ .'/../components/footer.php' ?>
+  <?php include __DIR__ . '/../components/footer.php' ?>
   <script type="module" src="/public/js/nav-toggle.js" defer></script>
   <script type="module" src="/public/js/scroll.js" defer></script>
 </body>
+
 </html>
