@@ -190,8 +190,8 @@
     right: 0;
     width: 230px;
     height: 100vh;
-    /* height: 100dvh; */
-    gap: 0;
+    height: 100dvh;
+    gap: 5px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
