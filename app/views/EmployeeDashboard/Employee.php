@@ -165,7 +165,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php require __DIR__ . '/partial/employeeBookingRows.php'; ?>
+                                    <?php require __DIR__ . '/partial/employeebookingrows.php'; ?>
                                 </tbody>
                             </table>
                         </div>
