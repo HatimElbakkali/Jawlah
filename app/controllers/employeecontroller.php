@@ -1,7 +1,7 @@
 <?php
 
 
-require_once __DIR__ . '/../models/employeeModel.php';
+require_once __DIR__ . '/../models/employeemodel.php';
 
 class employeeController
 {
@@ -60,10 +60,6 @@ class employeeController
         echo json_encode($payload);
         exit;
     }
-
-    // ------------------------------------------------------------------
-    // Auth (employee only: has nothing to do with the admin login)
-    // ------------------------------------------------------------------
 
     public function showLogin(): void
     {
@@ -128,7 +124,7 @@ class employeeController
         $availabilityData = $this->employeeModel->getAvailabilityCalculated();
         $unreadCount      = $this->employeeModel->countUnreadMessages();
 
-        require __DIR__ . '/../views/EmployeeDashboard/Employee.php';
+        require __DIR__ . '/../views/EmployeeDashboard/employee.php';
     }
 
     public function searchBookings(): void
@@ -146,7 +142,7 @@ class employeeController
 
             $allBookings = $this->employeeModel->searchBookings($q, $type, $status, $date);
 
-            $viewPath = __DIR__ . '/../views/EmployeeDashboard/partial/Employeebookingrows.php';
+            $viewPath = __DIR__ . '/../views/EmployeeDashboard/partial/employeebookingrows.php';
             if (!is_file($viewPath)) {
                 throw new RuntimeException('View not found: ' . $viewPath);
             }
