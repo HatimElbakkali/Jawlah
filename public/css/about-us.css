@@ -733,6 +733,11 @@ sup {
     margin-top: 1.5rem;
     font-size: 0.75rem;
   }
+
+  .main-logo-wrapper {
+    margin: 0 0rem;
+    margin-top: 5rem;
+}
 }
 
 @media (prefers-reduced-motion: reduce) {
