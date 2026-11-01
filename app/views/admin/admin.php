@@ -316,7 +316,6 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Code</th>
                                         <th>Customer</th>
                                         <th>Type</th>
                                         <th>Activity / Pack</th>

@@ -2,7 +2,6 @@
     <?php foreach ($allBookings as $bk): ?>
         <tr data-id="<?= $bk['id'] ?>">
             <td><strong><?= htmlspecialchars($bk['id']) ?></strong></td>
-            <td><strong><?= htmlspecialchars($bk['code'] ?? '') ?></strong></td>
             <td>
                 <div class="customer-cell">
                     <div class="customer-meta">
