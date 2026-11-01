@@ -1068,20 +1068,11 @@ button {
   margin-top: auto;
 }
 
-/* .trust-footer-container {
-  max-width: var(--container);
-  margin: 0 auto;
-  padding: 0 clamp(1rem, 3vw, 1.5rem);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-} */
-
 .trust-footer-container {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1.25rem 1rem;
+  margin: 0 4rem;
 }
 
 .trust-cell {
