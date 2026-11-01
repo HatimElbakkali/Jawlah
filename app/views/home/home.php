@@ -33,7 +33,7 @@
       <img class="mountain-img" src="/public/assets/Images/Mountain.webp" alt="Mountain" loading="lazy">
       <div class="cta-wrapper">
         <a class="btn-discover" href="/public/tour">
-          Discover <span class="brand-text">JAWLAH. hh</span>
+          Discover <span class="brand-text">JAWLAH.</span>
         </a>
       </div>
     </main>
