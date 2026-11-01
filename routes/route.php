@@ -4,7 +4,7 @@ require_once __DIR__ . '/../app/controllers/tourController.php';
 require_once __DIR__ . '/../app/controllers/contactController.php';
 require_once __DIR__ . '/../app/controllers/bookingController.php';
 require_once __DIR__ . '/../app/controllers/adminController.php';
-require_once __DIR__ . '/../app/controllers/employeeController.php';
+require_once __DIR__ . '/../app/controllers/employeecontroller.php';
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
