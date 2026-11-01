@@ -685,7 +685,7 @@ sup {
 /* phones */
 @media (max-width: 576px) {
   .about-jawlah-section {
-    margin: 4rem 0 0;
+    margin: 1rem 0 0;
   }
 
   .about-title {
