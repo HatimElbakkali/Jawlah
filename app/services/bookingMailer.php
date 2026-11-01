@@ -21,11 +21,26 @@ class bookingMailer
     ): bool {
         $mail = new PHPMailer(true);
 
-        if (empty($bookingReference)) {
-            $bookingReference = 'JWL-' . strtoupper(substr(md5(uniqid('', true)), 0, 6));
-        }
-
         try {
+            // The reference MUST be the code saved in the DB, never a random one.
+            if (trim($bookingReference) === '') {
+                throw new InvalidArgumentException('Booking reference is required.');
+            }
+
+            // Escape user-provided values before putting them in HTML
+            $e = fn($v) => htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8');
+
+            $safeRef      = $e($bookingReference);
+            $safeName     = $e($name);
+            $safeEmail    = $e($email);
+            $safePhone    = $e($phone);
+            $safeActivity = $e($activityName);
+            $safeDate     = $e($reservationDate);
+            $safeTime     = $e($reservationTime);
+            $safeDuration = $e($duration);
+            $priceFmt     = number_format($pricePerPerson, 2);
+            $totalFmt     = number_format($totalPrice, 2);
+
             $mail->isSMTP();
 
             $mail->Host = MailConfig::get('SMTP_HOST');
@@ -67,7 +82,6 @@ class bookingMailer
 
             $mail->addAddress($email, $name);
 
-            // باقي code dyalk...
             $mail->isHTML(true);
             $mail->Subject = 'Booking Confirmed - JAWLAH';
 
@@ -96,13 +110,13 @@ class bookingMailer
                         &#10003;
                     </div>
                     <h2 style='margin:0 0 10px; color:#000; font-size:24px;'>
-                        Payment & Booking Confirmed!
+                        Payment &amp; Booking Confirmed!
                     </h2>
                     <p style='margin:0; color:#555; font-size:14px; line-height:1.6;'>
                         Shukran! Your desert experience is confirmed.
                     </p>
                     <p style='margin:6px 0 0; color:#555; font-size:14px;'>
-                        Booking Reference: <strong style='color:#231709;'>{$bookingReference}</strong>
+                        Booking Reference: <strong style='color:#231709;'>{$safeRef}</strong>
                     </p>
                 </div>
                 <div style='border:1px solid #ddd; margin-bottom:25px;'>
@@ -110,9 +124,9 @@ class bookingMailer
                         <strong style='color:#000; font-size:15px;'>Customer Information</strong>
                     </div>
                     <div style='padding:20px;'>
-                        <p style='margin:0 0 14px; color:#000;'><strong>Name:</strong> <span style='color:#555;'>{$name}</span></p>
-                        <p style='margin:0 0 14px; color:#000;'><strong>Email:</strong> <span style='color:#555;'>{$email}</span></p>
-                        <p style='margin:0; color:#000;'><strong>Phone:</strong> <span style='color:#555;'>{$phone}</span></p>
+                        <p style='margin:0 0 14px; color:#000;'><strong>Name:</strong> <span style='color:#555;'>{$safeName}</span></p>
+                        <p style='margin:0 0 14px; color:#000;'><strong>Email:</strong> <span style='color:#555;'>{$safeEmail}</span></p>
+                        <p style='margin:0; color:#000;'><strong>Phone:</strong> <span style='color:#555;'>{$safePhone}</span></p>
                     </div>
                 </div>
                 <div style='border:1px solid #ddd; margin-bottom:25px;'>
@@ -120,10 +134,10 @@ class bookingMailer
                         <strong style='color:#000; font-size:15px;'>Booking Details</strong>
                     </div>
                     <div style='padding:20px;'>
-                        <p style='margin:0 0 14px; color:#000;'><strong>Activity:</strong> <span style='color:#555;'>{$activityName}</span></p>
-                        <p style='margin:0 0 14px; color:#000;'><strong>Date:</strong> <span style='color:#555;'>{$reservationDate}</span></p>
-                        <p style='margin:0 0 14px; color:#000;'><strong>Time:</strong> <span style='color:#555;'>{$reservationTime}</span></p>
-                        <p style='margin:0 0 14px; color:#000;'><strong>Duration:</strong> <span style='color:#555;'>{$duration}</span></p>
+                        <p style='margin:0 0 14px; color:#000;'><strong>Activity:</strong> <span style='color:#555;'>{$safeActivity}</span></p>
+                        <p style='margin:0 0 14px; color:#000;'><strong>Date:</strong> <span style='color:#555;'>{$safeDate}</span></p>
+                        <p style='margin:0 0 14px; color:#000;'><strong>Time:</strong> <span style='color:#555;'>{$safeTime}</span></p>
+                        <p style='margin:0 0 14px; color:#000;'><strong>Duration:</strong> <span style='color:#555;'>{$safeDuration}</span></p>
                         <p style='margin:0; color:#000;'><strong>Passengers:</strong> <span style='color:#555;'>{$passengers}</span></p>
                     </div>
                 </div>
@@ -135,7 +149,7 @@ class bookingMailer
                         <table style='width:100%; border-collapse:collapse;'>
                             <tr>
                                 <td style='padding:10px 0; color:#555; border-bottom:1px solid #eee;'>Price per person</td>
-                                <td style='padding:10px 0; color:#000; text-align:right; border-bottom:1px solid #eee;'>\${$pricePerPerson}</td>
+                                <td style='padding:10px 0; color:#000; text-align:right; border-bottom:1px solid #eee;'>\${$priceFmt}</td>
                             </tr>
                             <tr>
                                 <td style='padding:10px 0; color:#555; border-bottom:1px solid #eee;'>Passengers</td>
@@ -143,7 +157,7 @@ class bookingMailer
                             </tr>
                             <tr>
                                 <td style='padding:18px 0 5px; color:#000; font-size:17px;'><strong>Total Paid</strong></td>
-                                <td style='padding:18px 0 5px; color:#9e8a45; font-size:20px; text-align:right;'><strong>\${$totalPrice}</strong></td>
+                                <td style='padding:18px 0 5px; color:#9e8a45; font-size:20px; text-align:right;'><strong>\${$totalFmt}</strong></td>
                             </tr>
                         </table>
                     </div>
@@ -176,12 +190,12 @@ Date: {$reservationDate}
 Time: {$reservationTime}
 Duration: {$duration}
 Passengers: {$passengers}
-Total Paid: \${$totalPrice}
+Total Paid: \${$totalFmt}
 ";
 
             return $mail->send();
-        } catch (\Throwable $e) {
-            error_log("PHPMailer Booking Error: " . $mail->ErrorInfo . " | " . $e->getMessage());
+        } catch (\Throwable $ex) {
+            error_log("PHPMailer Booking Error: " . $mail->ErrorInfo . " | " . $ex->getMessage());
             return false;
         }
     }

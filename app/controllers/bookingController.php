@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . "/../models/bookingModel.php";
+require_once __DIR__ . "/../services/bookingMailer.php";
 
 class bookingController
 {
@@ -173,6 +174,33 @@ class bookingController
 
             if (!$code) {
                 throw new Exception("Failed to record booking. Please try again.");
+            }
+
+            // Send confirmation email using the SAME code saved in the DB.
+            // A failed email must never cancel a booking that is already saved.
+            try {
+                $itemName = $item['name']
+                    ?? $item['title']
+                    ?? $item['activity_name']
+                    ?? $item['pack_name']
+                    ?? 'Activity';
+
+                $mailer = new bookingMailer();
+                $mailer->sendBookingEmail(
+                    $fullName,
+                    $email,
+                    $phone,
+                    (string) $itemName,
+                    $reservationDate,
+                    (string) $selectedTime,
+                    (string) $duration,
+                    $newParticipants,
+                    (float) $pricePerPerson,
+                    (float) $totalPrice,
+                    (string) $code
+                );
+            } catch (Throwable $mailError) {
+                error_log('Booking email failed: ' . $mailError->getMessage());
             }
 
             echo json_encode([
