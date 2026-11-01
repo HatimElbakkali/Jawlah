@@ -1,4 +1,3 @@
-// Place at: public/js/employee.js
 
 document.addEventListener('DOMContentLoaded', () => {
     'use strict';

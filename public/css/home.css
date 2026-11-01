@@ -255,7 +255,6 @@
   }
 }
 
-/* Tablets / small laptops */
 @media (min-width: 844px) and (max-width: 1200px) {
   .hero-title {
     height: 75vh;
@@ -267,14 +266,12 @@
   }
 }
 
-/* Large screens */
 @media (min-width: 1500px) {
   .btn-discover {
     margin-bottom: 2rem;
   }
 }
 
-/* Big screens / 2K-4K */
 @media (min-width: 2401px) {
   .hero-title {
     height: 58vh;
@@ -282,7 +279,6 @@
   }
 }
 
-/* Landscape phones (short height) */
 @media (max-height: 500px) and (orientation: landscape) {
   .hero-title {
     height: 80vh;
@@ -305,7 +301,6 @@
   }
 }
 
-/* Users who prefer reduced motion */
 @media (prefers-reduced-motion: reduce) {
 
   .mountain-img,

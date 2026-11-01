@@ -252,7 +252,6 @@
   }
 }
 
-/* Tablet : ghir l-7jm dyal logo + toggle kaykbar */
 @media (min-width: 577px) and (max-width: 843px) {
   :root {
     --nav-btn-size: 75px;
@@ -260,7 +259,6 @@
 }
 
 
-/* ---------- Laptop (844px -> 1200px) ---------- */
 @media (min-width: 844px) and (max-width: 1200px) {
   .nav-menu-glass {
     width: 30%;
@@ -272,7 +270,6 @@
 }
 
 
-/* ---------- 1500px -> 2400px ---------- */
 @media (min-width: 1500px) and (max-width: 2400px) {
   :root {
     --nav-height: 100px;

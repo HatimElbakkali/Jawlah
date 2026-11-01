@@ -22,12 +22,10 @@ class bookingMailer
         $mail = new PHPMailer(true);
 
         try {
-            // The reference MUST be the code saved in the DB, never a random one.
             if (trim($bookingReference) === '') {
                 throw new InvalidArgumentException('Booking reference is required.');
             }
 
-            // Escape user-provided values before putting them in HTML
             $e = fn($v) => htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8');
 
             $safeRef      = $e($bookingReference);

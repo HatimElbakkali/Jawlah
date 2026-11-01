@@ -14,12 +14,8 @@
   <link
     href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Amiri+Quran&display=swap"
     rel="stylesheet">
-    
-  <!-- Style -->
   <link rel="stylesheet" href="/public/css/tour.css" />
   <link rel="stylesheet" href="/public/css/nav.css">
-  <!-- Style -->
-
   <link rel="shortcut icon" href="/public/assets/Logo/favicon.ico" />
   <link rel="icon" type="image/png" sizes="16x16" href="/public/assets/Logo/favicon-16.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="/public/assets/Logo/favicon-32.png" />
