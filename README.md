@@ -1,16 +1,16 @@
-# 🐪 JAWLAH
+# JAWLAH
 
 > **JAWLAH** is a modern desert tourism booking platform designed to make desert experiences more organized, transparent, and accessible for travelers.
 
-The platform helps visitors discover desert activities and experience packages, check prices and availability, make organized reservations, and receive booking confirmations — all from one place.
+The platform helps visitors discover desert activities and experience packages, check prices and availability, make organized reservations, and receive booking confirmations, all from one place.
 
-The project includes a complete booking flow, activity management, contact system, admin dashboard, MySQL database integration, and automated email notifications.
+The project includes a complete booking flow, activity management, a contact system, two separate dashboards (**Admin** and **Employee**), MySQL database integration, and automated email notifications.
 
 ---
 
-## 🎯 The Problem & Our Solution
+## The Problem & Our Solution
 
-### ❌ The Problem
+### The Problem
 
 Desert tourism can sometimes be disorganized, especially for visitors who are unfamiliar with the area.
 
@@ -26,37 +26,37 @@ Travelers may face challenges such as:
 
 These issues can make the desert experience confusing and less transparent for travelers.
 
-### ✅ The JAWLAH Solution
+### The JAWLAH Solution
 
 **JAWLAH** aims to provide a centralized and organized platform for desert tourism.
 
 Through the platform, travelers can:
 
-* 🐪 Discover desert activities and experience packages
-* 💰 View clear and transparent prices
-* 📅 Check availability and select a suitable date and time
-* ⏱️ View activity duration and important details
-* 👥 Select the number and type of passengers
-* 🧾 Review the complete booking summary before confirmation
-* 🔖 Receive a unique booking reference
-* 📧 Receive an automated booking confirmation by email
-* 🤝 Connect more directly with organized service providers
-* 🚫 Reduce dependency on unauthorized middlemen
+* Discover desert activities and experience packages
+* View clear and transparent prices
+* Check availability and select a suitable date and time
+* View activity duration and important details
+* Select the number and type of passengers
+* Review the complete booking summary before confirmation
+* Receive a unique booking reference
+* Receive an automated booking confirmation by email
+* Connect more directly with organized service providers
+* Reduce dependency on unauthorized middlemen
 
 The goal of **JAWLAH** is not only to provide an online booking system, but also to contribute to a more **organized, transparent, reliable, and accessible desert tourism experience** for both travelers and service providers.
 
 ---
 
-## ✨ Features
+## Features
 
-### 🌵 Activities & Experiences
+### Activities & Experiences
 
 * Browse individual desert activities
 * Browse activity packages
 * View activity information, duration, price, and availability
 * Responsive tour interface
 
-### 📅 Booking System
+### Booking System
 
 * Multi-step booking experience
 * Select reservation date and time
@@ -64,23 +64,24 @@ The goal of **JAWLAH** is not only to provide an online booking system, but also
 * Choose number of passengers
 * Automatic price calculation
 * Booking confirmation
-* Unique booking reference generation
+* Unique booking reference generation (for example `JWL-XXXXXX`)
+* The same reference is saved in the database, shown to the customer, and sent in the confirmation email
 
-### 👥 Passenger Management
+### Passenger Management
 
 * Adults
 * Children
 * Infants
 * Booking validation before confirmation
 
-### 💰 Price Calculation
+### Price Calculation
 
 * Dynamic total price calculation
 * Price per person
 * Passenger-based pricing
 * Booking summary before confirmation
 
-### 📧 Email System
+### Email System
 
 * Booking confirmation emails
 * Contact form notifications
@@ -88,7 +89,7 @@ The goal of **JAWLAH** is not only to provide an online booking system, but also
 * Gmail SMTP integration using **PHPMailer**
 * Sensitive SMTP credentials stored securely using `.env`
 
-### 💬 Contact System
+### Contact System
 
 * Customer contact form
 * Client-side validation
@@ -96,28 +97,51 @@ The goal of **JAWLAH** is not only to provide an online booking system, but also
 * Messages stored in the database
 * Email notification when a new message is submitted
 
-### 🛠️ Admin Dashboard
+---
 
-* Dashboard statistics
-* Total bookings
-* Revenue overview
-* Activities management
-* Activity packs management
-* Availability management
+## Dashboards
+
+JAWLAH includes two separate dashboards with different access levels.
+
+### Admin Dashboard
+
+Full control of the platform, available at `/admin`.
+
+* Dashboard statistics (total bookings, revenue, activities, packs, messages)
 * Recent bookings
-* Customer messages
+* Bookings management: search by booking code, customer, email, phone, or activity, filter by type, status, and date, update status, delete
+* Activities management (create, edit, change availability status, delete)
+* Activity packs management (create, edit, change availability status, delete)
+* Availability overview calculated from existing bookings and capacity
+* Customer messages (mark as read, delete)
 
-### 🔐 Configuration & Security
+### Employee Dashboard
+
+A simpler dashboard for staff who handle daily operations, available at `/employee`.
+
+* Separate login page (session based)
+* Bookings list with search and filters, status updates, and deletion
+* Availability overview
+* Customer messages with an unread counter (mark as read, delete)
+* No access to activities or packs management, and no dashboard statistics
+
+---
+
+## Configuration & Security
 
 * Environment variables using `.env`
 * Database credentials are not stored directly in the source code
 * Gmail App Password is protected
 * `.env` excluded from Git using `.gitignore`
 * PDO prepared statements for database operations
+* Session-based authentication for the dashboards
+* User input is escaped before it is placed inside email templates
+
+> Before deploying, change the default employee credentials defined in the employee controller, and use a strong password for the database and the Gmail App Password.
 
 ---
 
-## 🛠️ Built With
+## Built With
 
 [![My Skills](https://skillicons.dev/icons?i=php,mysql,html,css,js)](https://skillicons.dev)
 
@@ -145,7 +169,7 @@ The goal of **JAWLAH** is not only to provide an online booking system, but also
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 JAWLAH follows an **MVC-style architecture** to separate application responsibilities.
 
@@ -188,7 +212,7 @@ JAWLAH/
 
 ---
 
-## ⚙️ Installation
+## Installation
 
 ### 1. Clone the repository
 
@@ -246,11 +270,11 @@ DB_PASSWORD=
 
 Add your own database and SMTP credentials.
 
-⚠️ Never commit your `.env` file.
+Never commit your `.env` file.
 
 ---
 
-## 🗄️ Database Setup
+## Database Setup
 
 Import:
 
@@ -273,7 +297,7 @@ DB_PASSWORD=
 
 ---
 
-## ▶️ Run Locally
+## Run Locally
 
 You can run the project using PHP's built-in development server:
 
@@ -287,9 +311,27 @@ Then open:
 http://localhost:8000
 ```
 
+Dashboards:
+
+```text
+http://localhost:8000/admin
+http://localhost:8000/employee
+```
+
 ---
 
-## 📦 Composer Dependencies
+## Deployment Notes
+
+When deploying to a Linux hosting (for example InfinityFree), keep in mind:
+
+* **File and folder names are case-sensitive.** `EmployeeDashboard` and `employeedashboard` are different paths on Linux, even if both work on Windows. The name used in `require` must match the real file name exactly.
+* Upload the `.env` file manually, with the hosting database host, name, user, and password (not `localhost`).
+* Upload the `vendor/` folder, or run `composer install` on the server if the hosting allows it.
+* Disable `display_errors` in production.
+
+---
+
+## Composer Dependencies
 
 The project uses Composer to manage PHP dependencies.
 
@@ -308,7 +350,7 @@ composer install
 
 ---
 
-## 🔒 Environment Variables
+## Environment Variables
 
 Sensitive information is stored in:
 
@@ -333,7 +375,7 @@ A safe template is available as:
 
 ---
 
-## 🎯 Project Goal
+## Project Goal
 
 JAWLAH was created to build a complete tourism booking experience where visitors can easily discover desert activities, check available experiences, make reservations, and receive confirmation emails.
 
@@ -347,10 +389,11 @@ The project also focuses on applying real backend development concepts such as:
 * Routing
 * Email integration
 * Booking management
+* Role-based dashboards
 
 ---
 
-## 🚀 Future Improvements
+## Future Improvements
 
 Possible future improvements include:
 
@@ -358,8 +401,7 @@ Possible future improvements include:
 * Customer accounts
 * Booking cancellation system
 * Advanced availability scheduling
-* Admin authentication improvements
-* Search and filtering
+* Stronger authentication for the admin and employee dashboards (hashed passwords stored in the database)
 * Reviews and ratings
 * Multiple languages
 * REST API
@@ -367,7 +409,7 @@ Possible future improvements include:
 
 ---
 
-## 📬 Connect
+## Connect
 
 If you want to see more of my work or contact me:
 
@@ -376,10 +418,10 @@ https://linktr.ee/HatimElbakkali
 
 ---
 
-## 📄 License
+## License
 
 This project was created for learning, portfolio, and development purposes.
 
 ---
 
-Thank you for checking out **JAWLAH**! 🐪✨
+Thank you for checking out **JAWLAH**.
