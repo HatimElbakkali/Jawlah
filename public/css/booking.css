@@ -1069,10 +1069,14 @@ button {
 }
 
 .trust-footer-container {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1.25rem 1rem;
-  margin: 0 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.25rem 4rem;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding-inline: clamp(1rem, 3vw, 1.5rem);
 }
 
 .trust-cell {
