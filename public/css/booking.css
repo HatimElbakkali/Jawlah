@@ -420,10 +420,21 @@ button {
   margin-right: 0.35rem;
 }
 
-.legend-dot.green  { background: var(--color-available); }
-.legend-dot.orange { background: var(--color-limited); }
-.legend-dot.gray   { background: var(--color-not-available); }
-.legend-dot.red    { background: var(--color-unavailable); }
+.legend-dot.green {
+  background: var(--color-available);
+}
+
+.legend-dot.orange {
+  background: var(--color-limited);
+}
+
+.legend-dot.gray {
+  background: var(--color-not-available);
+}
+
+.legend-dot.red {
+  background: var(--color-unavailable);
+}
 
 /* date picker (mobile friendly alternative) */
 .date-picker-row {
@@ -856,7 +867,8 @@ button {
   height: 44px;
   border-radius: var(--radius-sm);
   padding: 0 0.85rem;
-  font-size: 1rem; /* 16px: stops iOS zoom on focus */
+  font-size: 1rem;
+  /* 16px: stops iOS zoom on focus */
 }
 
 .form-field input:focus {
@@ -900,7 +912,7 @@ button {
   transition: all 0.15s ease;
 }
 
-.pay-tab-option input:checked + .pay-tab-badge,
+.pay-tab-option input:checked+.pay-tab-badge,
 .pay-tab-option.selected .pay-tab-badge {
   background: var(--brown);
   color: #FFF;
@@ -1056,7 +1068,7 @@ button {
   margin-top: auto;
 }
 
-.trust-footer-container {
+/* .trust-footer-container {
   max-width: var(--container);
   margin: 0 auto;
   padding: 0 clamp(1rem, 3vw, 1.5rem);
@@ -1064,6 +1076,12 @@ button {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+} */
+
+.trust-footer-container {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem 1rem;
 }
 
 .trust-cell {
@@ -1184,8 +1202,13 @@ button {
   transform: translateX(-50%) translateY(0);
 }
 
-.toast--success { background: #2a6a2a; }
-.toast--error   { background: #8a2a2a; }
+.toast--success {
+  background: #2a6a2a;
+}
+
+.toast--error {
+  background: #8a2a2a;
+}
 
 #org {
   display: flex;
@@ -1198,24 +1221,49 @@ button {
    ANIMATIONS
    ========================================================= */
 @keyframes connectorGradient {
-  from { background-position: 0%; }
-  to   { background-position: 250%; }
+  from {
+    background-position: 0%;
+  }
+
+  to {
+    background-position: 250%;
+  }
 }
 
 @keyframes connectorShine {
-  from { left: -35%; }
-  to   { left: 135%; }
+  from {
+    left: -35%;
+  }
+
+  to {
+    left: 135%;
+  }
 }
 
 @keyframes stepPop {
-  0%   { transform: scale(.92); }
-  60%  { transform: scale(1.08); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(.92);
+  }
+
+  60% {
+    transform: scale(1.08);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* =========================================================
@@ -1303,17 +1351,36 @@ button {
   }
 
   .trust-footer-container {
-    flex-direction: column;
-    align-items: flex-start;
+    width: 100%;
+    max-width: var(--container);
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 3vw, 1.5rem);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem 0.75rem;
   }
 
-  .screen-footer-actions > * {
+  .trust-cell {
+    align-items: flex-start;
+    gap: 0.5rem;
+    min-width: 0;
+  }
+
+  .trust-title {
+    font-size: 0.75rem;
+  }
+
+  .trust-sub {
+    font-size: 0.68rem;
+  }
+
+  .screen-footer-actions>* {
     flex: 1 1 auto;
   }
 }
 
 /* very small phones */
 @media (max-width: 360px) {
+
   .section-subtitle,
   .info-notice-card {
     font-size: 0.8rem;

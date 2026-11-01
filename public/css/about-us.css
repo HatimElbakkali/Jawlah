@@ -701,27 +701,12 @@ sup {
     border-radius: 0 0 var(--radius-xlarge) 0;
   }
 
-  .feature-card,
-  .testimonial-card {
+  .feature-card {
     width: 100%;
   }
 
   .feature-desc {
     padding-right: 4rem;
-  }
-
-  .testimonials-wrapper {
-    align-items: center;
-    margin: 1.5rem 0;
-    gap: 40px;
-  }
-
-  .testimonial-quote {
-    padding: 0 4rem 0 1rem;
-  }
-
-  .testimonial-author {
-    margin-left: 1rem;
   }
 
   .cta-banner {
@@ -746,10 +731,13 @@ sup {
   }
 }
 
+/* =========================================================
+   TESTIMONIALS (desktop layout: title | clients)
+   ========================================================= */
 .behind-section:has(.testimonials-wrapper) {
   display: grid;
-  grid-template-columns: minmax(14rem, 1fr) minmax(0, 2fr); /* titre | clients */
-  column-gap: clamp(13rem, 9vw, 4rem);
+  grid-template-columns: minmax(14rem, 1fr) minmax(0, 2fr);
+  column-gap: clamp(2rem, 9vw, 13rem);
   align-items: start;
 }
 
@@ -770,13 +758,88 @@ sup {
   text-align: left;
 }
 
+/* =========================================================
+   TESTIMONIALS: TABLET + MOBILE (matches the Figma mobile design)
+   Keep this block at the very END of the file.
+   Layout: title, big gold quote mark, full-width text, author.
+   ========================================================= */
 @media (max-width: 1100px) {
+  /* one single column, no grid gap */
   .behind-section:has(.testimonials-wrapper) {
-    grid-template-columns: minmax(0, 1fr);
-    row-gap: 0;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 2.5rem;
   }
 
-  .behind-section:has(.testimonials-wrapper) .testimonials-wrapper {
-    padding-block: 2.5rem;
+  .behind-section:has(.testimonials-wrapper) .testimonials-wrapper,
+  .testimonials-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 2rem;
+    margin: 0;
+    /* padding-block: 1.5rem 0; */
+  }
+
+  /* the card must be a normal block, full width */
+  .behind-section:has(.testimonials-wrapper) .testimonial-card,
+  .testimonial-card {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  .testimonial-card > * {
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .behind-section:has(.testimonials-wrapper) .testimonial-quote,
+  .testimonial-quote {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    margin: 0.5rem 0 0;
+    padding: 0 0.5rem;
+    text-align: left;
+    white-space: normal;
+    word-break: normal;
+    overflow-wrap: break-word;
+    hyphens: none;
+  }
+
+  .testimonial-author {
+    margin: 1.25rem 0 0 0.5rem;
+    text-align: left;
+  }
+
+  .testimonial-card .quote-mark,
+  .testimonial-card .quote-icon,
+  .testimonial-card .testimonial-icon,
+  .testimonial-card .testimonial-mark {
+    display: block;
+    width: auto;
+    height: auto;
+    margin: 0 0 0.25rem 0.5rem;
+    color: var(--gold-hover);
+    font-family: var(--font-title);
+    font-size: clamp(3.5rem, 12vw, 5rem);
+    line-height: 0.8;
+  }
+}
+
+@media (max-width: 576px) {
+  .testimonial-quote,
+  .behind-section:has(.testimonials-wrapper) .testimonial-quote {
+    padding: 0 0.25rem;
+  }
+
+  .testimonial-author {
+    margin-left: 0.25rem;
   }
 }

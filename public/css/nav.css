@@ -99,7 +99,7 @@
   gap: 0;
   width: 40%;
   height: var(--nav-height);
-  padding-bottom: 16px; /* kayrf3 l-text chwiya (l-pill mdawra mn t7t) */
+  padding-bottom: 26px; /* kayrf3 l-text chwiya (l-pill mdawra mn t7t) */
   border: 1px solid var(--glass-border-light);
   border-radius: 0 0 8rem 8rem;
   background: var(--glass-background);

@@ -135,7 +135,7 @@
 
       <section class="behind-section">
         <div>
-          <h1 class="testimonials-title">What our clients say <sup>,,</sup></h1>
+          <h1 class="testimonials-title">What our clients say</h1>
         </div>
 
         <div class="testimonials-wrapper">
