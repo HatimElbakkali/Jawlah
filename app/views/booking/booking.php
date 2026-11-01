@@ -586,10 +586,10 @@
     <div class="modal-box">
       <div class="modal-check-circle">✓</div>
       <h2 class="modal-head">Payment & Booking Confirmed!</h2>
-      <p class="modal-msg">Shukran! Your luxury desert experience is confirmed. Voucher reference: <strong
-          id="modal-ref-code">JWL-984210</strong>.</p>
+      <p class="modal-msg">Thanks! Your luxury desert experience is confirmed. Voucher reference: <strong
+          id="modal-ref-code">-</strong>.</p>
       <div class="modal-summary-list">
-        <p><strong>Activity:</strong> Camel Riding</p>
+        <p><strong>Activity:</strong> <?= htmlspecialchars($bookingInfo['title'] ?? '') ?></p>
         <p><strong>Date:</strong> <span id="modal-date-val">Not selected</span></p>
         <p><strong>Time & Duration:</strong> <span id="modal-time-val">03:30 PM (30 min)</span></p>
         <p><strong>Total Paid:</strong> <span id="modal-price-val">$60</span></p>

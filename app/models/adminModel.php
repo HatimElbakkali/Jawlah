@@ -69,6 +69,12 @@ class adminModel
 
     public function getAllBookings(): array
     {
+        return $this->searchBookings();
+    }
+
+
+    public function searchBookings(string $q = '', string $type = 'all', string $status = 'all', string $date = ''): array
+    {
         $sql = "SELECT
                     b.*,
                     CASE
@@ -79,10 +85,45 @@ class adminModel
                 FROM bookings b
                 LEFT JOIN desert_activity da ON b.activity_id = da.id
                 LEFT JOIN desert_activities_pack dp ON b.pack_id = dp.id
-                ORDER BY b.id ASC";
+                WHERE 1 = 1";
+
+        $params = [];
+
+        $q = trim($q);
+        if ($q !== '') {
+            $like = '%' . addcslashes($q, '%_\\') . '%';
+            $sql .= " AND (
+                        b.code LIKE :q1
+                        OR b.full_name LIKE :q2
+                        OR b.email LIKE :q3
+                        OR b.phone_number LIKE :q4
+                        OR COALESCE(da.title, dp.title, '') LIKE :q5
+                    )";
+            foreach (['q1', 'q2', 'q3', 'q4', 'q5'] as $key) {
+                $params[$key] = $like;
+            }
+        }
+
+        if ($type === 'activity') {
+            $sql .= " AND b.activity_id IS NOT NULL";
+        } elseif ($type === 'pack') {
+            $sql .= " AND b.activity_id IS NULL";
+        }
+
+        if (in_array($status, ['confirmed', 'pending', 'cancelled', 'completed'], true)) {
+            $sql .= " AND b.status = :status";
+            $params['status'] = $status;
+        }
+
+        if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $date)) {
+            $sql .= " AND b.reservation_date = :date";
+            $params['date'] = $date;
+        }
+
+        $sql .= " ORDER BY b.id ASC";
 
         $stmt = $this->connect->prepare($sql);
-        $stmt->execute();
+        $stmt->execute($params);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 

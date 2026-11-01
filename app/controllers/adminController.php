@@ -405,6 +405,35 @@ class adminController
         exit;
     }
 
+    public function searchBookings(): void
+    {
+        $this->requireAuth();
+        header('Content-Type: application/json');
+
+        try {
+            $q = trim($_GET['q'] ?? '');
+            $type = $_GET['type'] ?? 'all';
+            $status = $_GET['status'] ?? 'all';
+            $date = $_GET['date'] ?? '';
+
+            $allBookings = $this->adminModel->searchBookings($q, $type, $status, $date);
+
+            ob_start();
+            require __DIR__ . '/../views/admin/partial/bookingRows.php';
+            $html = ob_get_clean();
+
+            echo json_encode([
+                'success' => true,
+                'count' => count($allBookings),
+                'html' => $html
+            ]);
+        } catch (Throwable $e) {
+            http_response_code(400);
+            echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+        }
+        exit;
+    }
+
     public function updateBookingStatus(): void
     {
         $this->requireAuth();

@@ -4,6 +4,7 @@ require_once __DIR__ . '/../app/controllers/tourController.php';
 require_once __DIR__ . '/../app/controllers/contactController.php';
 require_once __DIR__ . '/../app/controllers/bookingController.php';
 require_once __DIR__ . '/../app/controllers/adminController.php';
+require_once __DIR__ . '/../app/controllers/employeeController.php';
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
@@ -56,6 +57,7 @@ switch ($uri) {
             require __DIR__ . '/../app/views/contact/contact-us.php';
         }
         break;
+
 
     case '/admin':
         $adminController = new adminController();
@@ -122,6 +124,11 @@ switch ($uri) {
         $adminController->deleteBooking();
         break;
 
+    case '/admin/bookings/search':
+        $adminController = new adminController();
+        $adminController->searchBookings();
+        break;
+
     case '/admin/message/update-status':
         $adminController = new adminController();
         $adminController->updateMessageStatus();
@@ -131,6 +138,52 @@ switch ($uri) {
         $adminController = new adminController();
         $adminController->deleteMessage();
         break;
+
+
+    case '/employee':
+        $employeeController = new employeeController();
+        $employeeController->dashBoard();
+        break;
+
+    case '/employee/login':
+        $employeeController = new employeeController();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $employeeController->login();
+        } else {
+            $employeeController->showLogin();
+        }
+        break;
+
+    case '/employee/logout':
+        $employeeController = new employeeController();
+        $employeeController->logout();
+        break;
+
+    case '/employee/bookings/search':
+        $employeeController = new employeeController();
+        $employeeController->searchBookings();
+        break;
+
+    case '/employee/booking/update-status':
+        $employeeController = new employeeController();
+        $employeeController->updateBookingStatus();
+        break;
+
+    case '/employee/booking/delete':
+        $employeeController = new employeeController();
+        $employeeController->deleteBooking();
+        break;
+
+    case '/employee/message/update-status':
+        $employeeController = new employeeController();
+        $employeeController->updateMessageStatus();
+        break;
+
+    case '/employee/message/delete':
+        $employeeController = new employeeController();
+        $employeeController->deleteMessage();
+        break;
+
 
     case '/login':
     case '/connexion':

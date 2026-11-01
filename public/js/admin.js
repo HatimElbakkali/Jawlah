@@ -115,79 +115,80 @@ document.addEventListener('DOMContentLoaded', () => {
         select.classList.add(val);
     }
 
-    document.querySelectorAll('.status-select').forEach(select => {
+    document.querySelectorAll('.status-select').forEach(syncStatusSelectClass);
+
+    document.addEventListener('change', (e) => {
+        const select = e.target.closest ? e.target.closest('.status-select') : null;
+        if (!select) return;
+
         syncStatusSelectClass(select);
 
-        select.addEventListener('change', () => {
-            syncStatusSelectClass(select);
+        const bookingId = select.getAttribute('data-booking-id');
+        const messageId = select.getAttribute('data-message-id');
+        const itemId = select.getAttribute('data-id');
+        const itemType = select.getAttribute('data-type');
+        const newStatus = select.value;
 
-            const bookingId = select.getAttribute('data-booking-id');
-            const messageId = select.getAttribute('data-message-id');
-            const itemId = select.getAttribute('data-id');
-            const itemType = select.getAttribute('data-type');
-            const newStatus = select.value;
+        if (bookingId) {
+            fetch('/public/admin/booking/update-status', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: bookingId, status: newStatus })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    showToast('Booking status updated.', 'success');
+                } else {
+                    showToast(data.message || 'Failed to update booking status.', 'error');
+                }
+            })
+            .catch(() => showToast('Network error updating booking status.', 'error'));
+        } else if (messageId) {
+            fetch('/public/admin/message/update-status', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: messageId, status: newStatus })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    showToast('Message status updated.', 'success');
+                } else {
+                    showToast(data.message || 'Failed to update message status.', 'error');
+                }
+            })
+            .catch(() => showToast('Network error updating message status.', 'error'));
+        } else if (itemId && itemType) {
+            const endpoint = (itemType === 'pack')
+                ? '/public/admin/pack/update-status'
+                : '/public/admin/activity/update-status';
+            const card = select.closest('.item-card');
 
-            if (bookingId) {
-                fetch('/public/admin/booking/update-status', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ id: bookingId, status: newStatus })
-                })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.success) {
-                        showToast('Booking status updated.', 'success');
-                    } else {
-                        showToast(data.message || 'Failed to update booking status.', 'error');
-                    }
-                })
-                .catch(() => showToast('Network error updating booking status.', 'error'));
-            } else if (messageId) {
-                fetch('/public/admin/message/update-status', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ id: messageId, status: newStatus })
-                })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.success) {
-                        showToast('Message status updated.', 'success');
-                    } else {
-                        showToast(data.message || 'Failed to update message status.', 'error');
-                    }
-                })
-                .catch(() => showToast('Network error updating message status.', 'error'));
-            } else if (itemId && itemType) {
-                const endpoint = (itemType === 'pack')
-                    ? '/public/admin/pack/update-status'
-                    : '/public/admin/activity/update-status';
-                const card = select.closest('.item-card');
-
-                fetch(endpoint, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ id: itemId, status: newStatus })
-                })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.success) {
-                        showToast(`${itemType === 'pack' ? 'Pack' : 'Activity'} status updated.`, 'success');
-                        if (card) {
-                            if (newStatus === 'not_available') {
-                                card.classList.add('is-unavailable');
-                            } else {
-                                card.classList.remove('is-unavailable');
-                            }
-                            const editBtn = card.querySelector(itemType === 'pack' ? '.btn-edit-pack' : '.btn-edit-activity');
-                            if (editBtn) editBtn.setAttribute('data-status', newStatus);
+            fetch(endpoint, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: itemId, status: newStatus })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    showToast(`${itemType === 'pack' ? 'Pack' : 'Activity'} status updated.`, 'success');
+                    if (card) {
+                        if (newStatus === 'not_available') {
+                            card.classList.add('is-unavailable');
+                        } else {
+                            card.classList.remove('is-unavailable');
                         }
-                    } else {
-                        showToast(data.message || 'Failed to update status.', 'error');
+                        const editBtn = card.querySelector(itemType === 'pack' ? '.btn-edit-pack' : '.btn-edit-activity');
+                        if (editBtn) editBtn.setAttribute('data-status', newStatus);
                     }
-                })
-                .catch(() => showToast('Network error updating status.', 'error'));
-            }
-        });
+                } else {
+                    showToast(data.message || 'Failed to update status.', 'error');
+                }
+            })
+            .catch(() => showToast('Network error updating status.', 'error'));
+        }
     });
 
     document.querySelectorAll('.btn-view-message').forEach(btn => {
@@ -394,27 +395,29 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    document.querySelectorAll('.btn-delete-booking').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const id = btn.getAttribute('data-id');
-            if (confirm('Are you sure you want to delete this booking?')) {
-                fetch('/public/admin/booking/delete', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ id: id })
-                })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.success) {
-                        showToast('Booking deleted.', 'success');
-                        const tr = btn.closest('tr');
-                        if (tr) tr.remove();
-                    } else {
-                        showToast(data.message || 'Failed to delete booking.', 'error');
-                    }
-                });
-            }
-        });
+    document.addEventListener('click', (e) => {
+        const btn = e.target.closest ? e.target.closest('.btn-delete-booking') : null;
+        if (!btn) return;
+
+        const id = btn.getAttribute('data-id');
+        if (confirm('Are you sure you want to delete this booking?')) {
+            fetch('/public/admin/booking/delete', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id: id })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    showToast('Booking deleted.', 'success');
+                    const tr = btn.closest('tr');
+                    if (tr) tr.remove();
+                } else {
+                    showToast(data.message || 'Failed to delete booking.', 'error');
+                }
+            })
+            .catch(() => showToast('Network error deleting booking.', 'error'));
+        }
     });
 
     document.querySelectorAll('.btn-delete-message').forEach(btn => {
@@ -446,41 +449,46 @@ document.addEventListener('DOMContentLoaded', () => {
     const bookingDateFilter = document.getElementById('bookingDateFilter');
     const bookingsTableBody = document.querySelector('#bookingsTable tbody');
 
-    function filterBookingsDOM() {
+    let bookingSearchTimer = null;
+    let bookingSearchSeq = 0;
+
+    async function loadBookings() {
         if (!bookingsTableBody) return;
-        const rows = bookingsTableBody.querySelectorAll('tr');
-        const query = bookingSearchInput ? bookingSearchInput.value.toLowerCase().trim() : '';
-        const statusVal = bookingStatusFilter ? bookingStatusFilter.value.toLowerCase() : 'all';
-        const typeVal = bookingTypeFilter ? bookingTypeFilter.value.toLowerCase() : 'all';
-        const dateVal = bookingDateFilter ? bookingDateFilter.value : '';
 
-        rows.forEach(row => {
-            const customerText = row.querySelector('.customer-name')?.textContent.toLowerCase() || '';
-            const emailText = row.querySelector('.customer-email')?.textContent.toLowerCase() || '';
-            const idText = row.children[0]?.textContent.toLowerCase() || '';
-            const itemText = row.children[3]?.textContent.toLowerCase() || '';
-            const typeText = row.children[2]?.textContent.toLowerCase() || '';
-            const rowDate = row.children[4]?.textContent.trim() || '';
-            const statusSelect = row.querySelector('.status-select');
-            const statusValInRow = statusSelect ? statusSelect.value.toLowerCase() : '';
-
-            const matchesSearch = !query || customerText.includes(query) || emailText.includes(query) || idText.includes(query) || itemText.includes(query);
-            const matchesStatus = statusVal === 'all' || statusValInRow === statusVal;
-            const matchesType = typeVal === 'all' || typeText.includes(typeVal);
-            const matchesDate = !dateVal || rowDate.includes(dateVal);
-
-            if (matchesSearch && matchesStatus && matchesType && matchesDate) {
-                row.style.display = '';
-            } else {
-                row.style.display = 'none';
-            }
+        const seq = ++bookingSearchSeq;
+        const params = new URLSearchParams({
+            q: bookingSearchInput ? bookingSearchInput.value.trim() : '',
+            type: bookingTypeFilter ? bookingTypeFilter.value : 'all',
+            status: bookingStatusFilter ? bookingStatusFilter.value : 'all',
+            date: bookingDateFilter ? bookingDateFilter.value : ''
         });
+
+        try {
+            const res = await fetch('/public/admin/bookings/search?' + params.toString());
+            const data = await res.json();
+
+            if (seq !== bookingSearchSeq) return;
+
+            if (data.success) {
+                bookingsTableBody.innerHTML = data.html;
+                bookingsTableBody.querySelectorAll('.status-select').forEach(syncStatusSelectClass);
+            } else {
+                showToast(data.message || 'Failed to search bookings.', 'error');
+            }
+        } catch (err) {
+            showToast('Network error searching bookings.', 'error');
+        }
     }
 
-    if (bookingSearchInput) bookingSearchInput.addEventListener('input', filterBookingsDOM);
-    if (bookingStatusFilter) bookingStatusFilter.addEventListener('change', filterBookingsDOM);
-    if (bookingTypeFilter) bookingTypeFilter.addEventListener('change', filterBookingsDOM);
-    if (bookingDateFilter) bookingDateFilter.addEventListener('change', filterBookingsDOM);
+    if (bookingSearchInput) {
+        bookingSearchInput.addEventListener('input', () => {
+            clearTimeout(bookingSearchTimer);
+            bookingSearchTimer = setTimeout(loadBookings, 300);
+        });
+    }
+    if (bookingStatusFilter) bookingStatusFilter.addEventListener('change', loadBookings);
+    if (bookingTypeFilter) bookingTypeFilter.addEventListener('change', loadBookings);
+    if (bookingDateFilter) bookingDateFilter.addEventListener('change', loadBookings);
 
     const messageSearchInput = document.getElementById('messageSearchInput');
     const messageStatusFilter = document.getElementById('messageStatusFilter');

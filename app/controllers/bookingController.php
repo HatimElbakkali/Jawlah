@@ -155,7 +155,7 @@ class bookingController
             $activityId = ($type === 'activity') ? $id : null;
             $packId = ($type === 'pack') ? $id : null;
 
-            $success = $this->bookingModel->createBooking([
+            $code = $this->bookingModel->createBooking([
                 'activity_id' => $activityId,
                 'pack_id' => $packId,
                 'full_name' => $fullName,
@@ -171,13 +171,14 @@ class bookingController
                 'selected_time' => $selectedTime
             ]);
 
-            if (!$success) {
+            if (!$code) {
                 throw new Exception("Failed to record booking. Please try again.");
             }
 
             echo json_encode([
                 "success" => true,
-                "message" => "Booking confirmed successfully!"
+                "message" => "Booking confirmed successfully!",
+                "code" => $code
             ]);
         } catch (Throwable $e) {
             http_response_code(400);

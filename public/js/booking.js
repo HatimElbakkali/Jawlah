@@ -97,6 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
     modalTimeVal: document.getElementById("modal-time-val"),
     modalPriceVal: document.getElementById("modal-price-val"),
     modalPayMethod: document.getElementById("modal-pay-method"),
+    modalRefCode: document.getElementById("modal-ref-code"),
     formName: document.getElementById("form-name"),
     formEmail: document.getElementById("form-email"),
     formPhone: document.getElementById("form-phone"),
@@ -631,6 +632,11 @@ document.addEventListener("DOMContentLoaded", () => {
           elements.modalPayMethod.textContent = "Credit Card";
         }
 
+        // Booking reference code returned by the server (JWL-XXXXXX)
+        if (elements.modalRefCode && result.code) {
+          elements.modalRefCode.textContent = result.code;
+        }
+
         elements.modalConfirm.classList.add("active");
       } catch (error) {
         showToast(error.message || "Something went wrong. Please try again.");
@@ -639,6 +645,7 @@ document.addEventListener("DOMContentLoaded", () => {
         elements.btnConfirmBooking.textContent = "Confirm Booking";
       }
     });
+
 
     elements.btnCloseModal.addEventListener("click", () => {
       elements.modalConfirm.classList.remove("active");

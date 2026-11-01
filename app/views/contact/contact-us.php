@@ -37,7 +37,6 @@
         <div class="hero__arrow animate-hero-arrow">
           <a href="#contact99"><img class=" " src="/public/assets/Icons/arrow-down-return.svg" alt="Scroll down" /></a>
         </div>
-        <!-- <svg class="hero__arrow animate-hero-arrow" ...>...</svg> -->
       </div>
     </div>
   </header>
