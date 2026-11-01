@@ -6,7 +6,7 @@
 
   <?php require_once __DIR__ . '/../components/head.php' ?>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Book Experience | JAWLAH Desert Adventures</title>
   <link rel="preload" href="/public/assets/Fonts/Andalus.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -150,9 +150,9 @@
             </div>
 
             <div class="calendar-legend">
-              <span class="legend-dot green org"></span><span class="legend-text">Available</span>
-              <span class="legend-dot orange org"></span><span class="legend-text">Limited availability</span>
-              <span class="legend-dot gray org"></span><span class="legend-text">Not available</span>
+              <span class="legend-item"><span class="legend-dot green"></span>Available</span>
+              <span class="legend-item"><span class="legend-dot orange"></span>Limited availability</span>
+              <span class="legend-item"><span class="legend-dot gray"></span>Not available</span>
             </div>
           </div>
 

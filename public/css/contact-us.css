@@ -50,6 +50,8 @@
    ========================================================= */
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -229,6 +231,8 @@ a {
   gap: 1rem;
 }
 
+/* FIX (iOS Safari): integer border width + no scale() animation,
+   so the dashed border is never clipped / cut on one side */
 .card__icon-box {
   width: 5rem;
   height: 5rem;
@@ -236,11 +240,14 @@ a {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  border: 1.5px dashed var(--black);
+  border: 2px dashed var(--black);
   border-radius: 0 0 16px 0;
   opacity: 0;
-  transform: scale(0.65);
-  transition: opacity 0.45s var(--ease-out), transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform: translateY(14px);
+  transition: opacity 0.45s var(--ease-out), transform 0.45s var(--ease-out);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: opacity, transform;
 }
 
 .card__icon-box img {
@@ -257,7 +264,7 @@ a {
 
 .card.show .card__icon-box {
   opacity: 1;
-  transform: scale(1);
+  transform: none;
   transition-delay: 0.2s;
 }
 
@@ -286,6 +293,7 @@ a {
   font-size: 0.9rem;
   color: var(--black);
   transition: color 0.2s;
+  overflow-wrap: anywhere;
 }
 
 @media (hover: hover) {
@@ -442,13 +450,16 @@ a {
 
 .form-field input,
 .form-field textarea {
+  -webkit-appearance: none;
+  appearance: none;
   flex: 1;
   min-width: 0;
   background: transparent;
   border: none;
+  border-radius: 0;
   outline: none;
   font-family: var(--font-text);
-  font-size: 1.25rem;
+  font-size: 1.25rem; /* >= 16px: no zoom on iOS focus */
   font-weight: 800;
   color: var(--black);
 }
@@ -486,6 +497,8 @@ a {
 }
 
 .btn-send {
+  -webkit-appearance: none;
+  appearance: none;
   min-height: 48px;
   padding: 0.85rem 2.5rem;
   background: var(--footer-bg);
@@ -533,6 +546,7 @@ a {
    ========================================================= */
 .site-footer {
   background-color: var(--footer-bg);
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 .footer-logo {
@@ -788,7 +802,6 @@ a {
 }
 
 @media (prefers-reduced-motion: reduce) {
-
   *,
   *::before,
   *::after {
