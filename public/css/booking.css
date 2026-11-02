@@ -563,6 +563,7 @@ button {
 }
 
 .info-notice-card {
+  background: var(--glass-background-strong);
   border: 1px solid var(--glass-border-light);
   border-radius: var(--radius-md);
   box-shadow: 0 0 4px var(--shadow-light);
