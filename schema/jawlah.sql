@@ -17,6 +17,7 @@ SET NAMES utf8mb4;
 
 CREATE TABLE `bookings` (
     `id` int(11) NOT NULL,
+    `code` varchar(10)
     `activity_id` char(36) DEFAULT NULL,
     `pack_id` char(36) DEFAULT NULL,
     `full_name` varchar(150) NOT NULL,
