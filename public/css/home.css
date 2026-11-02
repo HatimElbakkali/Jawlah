@@ -67,7 +67,7 @@
   height: 72svh;
   color: var(--color-gold);
   font-family: var(--font-title);
-  font-size: clamp(4.5rem, 15vw, 22rem);
+  font-size: clamp(4.5rem, 13vw, 22rem);
   mix-blend-mode: color-burn;
   background: linear-gradient(110deg,
       var(--color-gold) 0%,
