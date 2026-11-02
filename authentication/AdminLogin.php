@@ -19,7 +19,7 @@
         href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Amiri+Quran&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="/public/css/AdminLogin.css">
+    <link rel="stylesheet" href="/public/css/adminLogin.css">
 </head>
 
 <body>
