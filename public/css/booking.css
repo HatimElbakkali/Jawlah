@@ -128,7 +128,7 @@ button {
 .participants-card,
 .review-details-card,
 .guest-details-form {
-  background: var(--glass-background-strong);
+  /* background: var(--glass-background-strong); */
   border: 1px solid var(--glass-border-light);
   border-radius: var(--radius-lg);
   padding: clamp(1rem, 3vw, 1.5rem);
@@ -489,7 +489,7 @@ button {
 
 .duration-select-card {
   position: relative;
-  background: var(--glass-background-strong);
+  /* background: var(--glass-background-strong); */
   border: 1.5px solid var(--glass-border-light);
   border-radius: var(--radius-lg);
   padding: clamp(1.25rem, 3vw, 1.75rem) clamp(1rem, 3vw, 1.5rem);
@@ -563,7 +563,7 @@ button {
 }
 
 .info-notice-card {
-  background: var(--glass-background-strong);
+  /* background: var(--glass-background-strong); */
   border: 1px solid var(--glass-border-light);
   border-radius: var(--radius-md);
   padding: 1rem 1.25rem;
