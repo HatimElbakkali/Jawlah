@@ -145,7 +145,7 @@ switch ($uri) {
         $employeeController->dashBoard();
         break;
 
-    case '/employee/login':
+    case '/employeeLogin':
         $employeeController = new employeeController();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $employeeController->login();
@@ -185,8 +185,7 @@ switch ($uri) {
         break;
 
 
-    case '/login':
-    case '/connexion':
+    case '/adminLogin':
         require __DIR__ . '/../authentication/AdminLogin.php';
         break;
 

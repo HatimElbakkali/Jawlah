@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     'use strict';
 
     const BASE = '/public/employee';
-    const LOGIN_URL = '/public/employee/login';
+    const LOGIN_URL = '/employeeLogin';
     const DEFAULT_SECTION = '#bookings';
     async function request(url, { method = 'GET', body = null, signal } = {}) {
         const init = { method, signal, headers: { 'Accept': 'application/json' } };

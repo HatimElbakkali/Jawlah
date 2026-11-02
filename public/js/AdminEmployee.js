@@ -45,7 +45,7 @@
                 btn.disabled = true;
 
                 try {
-                    const res = await fetch('/public/employee/login', {
+                    const res = await fetch('/employeeLogin', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                         body: JSON.stringify({ username, password })

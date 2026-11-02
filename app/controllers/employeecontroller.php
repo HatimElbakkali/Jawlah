@@ -37,7 +37,7 @@ class employeeController
                 'message' => 'Session expired. Please log in again.'
             ]);
         } else {
-            header('Location: /public/employee/login');
+            header('Location: /employeeLogin');
         }
         exit;
     }
@@ -115,7 +115,7 @@ class employeeController
         unset($_SESSION['employee_logged_in'], $_SESSION['employee_user']);
         session_regenerate_id(true);
 
-        header('Location: /public/employee/login');
+        header('Location: /employeeLogin');
         exit;
     }
 

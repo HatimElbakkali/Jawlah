@@ -17,7 +17,7 @@ class adminController
     private function requireAuth(): void
     {
         if (empty($_SESSION['admin_logged_in'])) {
-            header('Location: /public/login');
+            header('Location: /adminLogin');
             exit;
         }
     }
@@ -97,7 +97,7 @@ public function login(): void
         }
         $_SESSION = [];
         session_destroy();
-        header('Location: /public/login');
+        header('Location: /adminLogin');
         exit;
     }
 
