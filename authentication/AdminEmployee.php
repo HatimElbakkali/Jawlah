@@ -53,7 +53,7 @@
             <button type="submit" class="btn-submit" id="loginBtn">Sign in</button>
         </form>
     </div>
-    <script src="/public/js/AdminEmployee.js"></script>
+    <script src="/public/js/adminEmployee.js"></script>
 </body>
 
 </html>
