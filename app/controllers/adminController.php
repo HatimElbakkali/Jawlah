@@ -42,41 +42,53 @@ class adminController
         require_once __DIR__ . "/../views/admin/admin.php";
     }
 
-    public function login(): void
-    {
-        header('Content-Type: application/json');
+public function login(): void
+{
+    header('Content-Type: application/json');
 
-        try {
-            $input = json_decode(file_get_contents('php://input'), true);
-            $username = trim($input['username'] ?? $_POST['username'] ?? '');
-            $password = trim($input['password'] ?? $_POST['password'] ?? '');
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
 
-            if (empty($username) || empty($password)) {
-                throw new Exception('Please enter both username and password.');
-            }
+    try {
+        $input = json_decode(file_get_contents('php://input'), true);
+        $username = trim($input['username'] ?? $_POST['username'] ?? '');
+        $password = trim($input['password'] ?? $_POST['password'] ?? '');
 
-            if ($username === 'hatim' && $password === 'hatimelbakkali12345') {
-                $_SESSION['admin_logged_in'] = true;
-                $_SESSION['admin_user'] = $username;
+        if (empty($username) || empty($password)) {
+            throw new Exception('Please enter both username and password.');
+        }
 
-                echo json_encode([
-                    'success' => true,
-                    'message' => 'Login successful.',
-                    'redirect' => '/public/admin'
-                ]);
-                exit;
-            } else {
-                throw new Exception('Invalid username or password.');
-            }
-        } catch (Throwable $e) {
-            http_response_code(401);
+        $adminUser = $_ENV['ADMIN_USERNAME'] ?? '';
+        $adminHash = $_ENV['ADMIN_PASSWORD_HASH'] ?? '';
+
+        if ($adminUser !== ''
+            && $adminHash !== ''
+            && hash_equals($adminUser, $username)
+            && password_verify($password, $adminHash)) {
+
+            session_regenerate_id(true);
+            $_SESSION['admin_logged_in'] = true;
+            $_SESSION['admin_user'] = $username;
+
             echo json_encode([
-                'success' => false,
-                'message' => $e->getMessage()
+                'success' => true,
+                'message' => 'Login successful.',
+                'redirect' => '/public/admin'
             ]);
             exit;
         }
+
+        throw new Exception('Invalid username or password.');
+    } catch (Throwable $e) {
+        http_response_code(401);
+        echo json_encode([
+            'success' => false,
+            'message' => $e->getMessage()
+        ]);
+        exit;
     }
+}
 
     public function logout(): void
     {

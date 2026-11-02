@@ -5,10 +5,6 @@ require_once __DIR__ . '/../models/employeemodel.php';
 
 class employeeController
 {
-    private const USERS = [
-        'employee' => 'employee1234',
-    ];
-
     private employeeModel $employeeModel;
 
     public function __construct()
@@ -18,7 +14,15 @@ class employeeController
         }
         $this->employeeModel = new employeeModel();
     }
-    
+
+    private function getUsers(): array
+    {
+        $user = $_ENV['EMPLOYEE_USERNAME'] ?? '';
+        $hash = $_ENV['EMPLOYEE_PASSWORD_HASH'] ?? '';
+
+        return ($user !== '' && $hash !== '') ? [$user => $hash] : [];
+    }
+
     private function requireAuth(bool $json = false): void
     {
         if (!empty($_SESSION['employee_logged_in'])) {
@@ -85,9 +89,10 @@ class employeeController
                 throw new InvalidArgumentException('Please enter both username and password.');
             }
 
-            $expected = self::USERS[$username] ?? null;
+            $users = $this->getUsers();
+            $hash  = $users[$username] ?? null;
 
-            if ($expected === null || !hash_equals($expected, $password)) {
+            if ($hash === null || !password_verify($password, $hash)) {
                 $this->respond(['success' => false, 'message' => 'Invalid username or password.'], 401);
             }
 
