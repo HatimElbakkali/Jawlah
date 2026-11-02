@@ -18,7 +18,11 @@
             --error-text: #b3261e;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
         body {
             min-height: 100vh;
@@ -48,7 +52,10 @@
             font-weight: 400;
             line-height: 1.2;
         }
-        .login-title span { color: var(--gold); }
+
+        .login-title span {
+            color: var(--gold);
+        }
 
         .login-card {
             width: 100%;
@@ -70,9 +77,14 @@
             color: var(--error-text);
             font-size: 0.85rem;
         }
-        .error.show { display: block; }
 
-        .field { margin-bottom: 1.1rem; }
+        .error.show {
+            display: block;
+        }
+
+        .field {
+            margin-bottom: 1.1rem;
+        }
 
         label {
             display: block;
@@ -81,7 +93,9 @@
             font-weight: 600;
         }
 
-        .input-wrap { position: relative; }
+        .input-wrap {
+            position: relative;
+        }
 
         input {
             width: 100%;
@@ -95,14 +109,20 @@
             font-size: 0.92rem;
             transition: border-color 0.15s, box-shadow 0.15s;
         }
+
         input:focus {
             outline: none;
             border-color: rgba(35, 23, 9, 0.55);
             box-shadow: 0 0 0 3px rgba(35, 23, 9, 0.10);
         }
-        input.invalid { border-color: var(--error-text); }
 
-        .input-wrap input { padding-right: 2.6rem; }
+        input.invalid {
+            border-color: var(--error-text);
+        }
+
+        .input-wrap input {
+            padding-right: 2.6rem;
+        }
 
         .toggle-pass {
             position: absolute;
@@ -119,10 +139,23 @@
             color: var(--text);
             cursor: pointer;
         }
-        .toggle-pass svg { width: 18px; height: 18px; }
-        .toggle-pass .icon-hide { display: none; }
-        .toggle-pass.showing .icon-show { display: none; }
-        .toggle-pass.showing .icon-hide { display: block; }
+
+        .toggle-pass svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .toggle-pass .icon-hide {
+            display: none;
+        }
+
+        .toggle-pass.showing .icon-show {
+            display: none;
+        }
+
+        .toggle-pass.showing .icon-hide {
+            display: block;
+        }
 
         .btn-submit {
             width: 100%;
@@ -138,10 +171,23 @@
             cursor: pointer;
             transition: transform 0.1s, opacity 0.15s;
         }
-        .btn-submit:hover { opacity: 0.92; }
-        .btn-submit:active { transform: translateY(1px); }
-        .btn-submit:disabled { opacity: 0.6; cursor: wait; }
+
+        .btn-submit:hover {
+            opacity: 0.92;
+        }
+
+        .btn-submit:active {
+            transform: translateY(1px);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.6;
+            cursor: wait;
+        }
 
         @media (max-width: 480px) {
-            .login-card { padding: 1.3rem 1.1rem; border-radius: 18px; }
+            .login-card {
+                padding: 1.3rem 1.1rem;
+                border-radius: 18px;
+            }
         }
