@@ -63,8 +63,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 77vh;
-  height: 77svh;
+  height: 72vh;
+  height: 72svh;
   color: var(--color-gold);
   font-family: var(--font-title);
   font-size: clamp(4.5rem, 13vw, 22rem);
@@ -119,7 +119,7 @@
 
 .btn-discover {
   display: inline-block;
-  padding: clamp(0.75rem, 0.2rem + 1vw, 0.75rem) clamp(1.75rem, .2rem + 0.75vw, 2rem);
+  padding: clamp(0.25rem, 0.5rem + 1vw, .5rem) clamp(1rem, .2rem + 0.5vw, 2rem);
   border: 1px solid var(--glass-border-light);
   border-radius: clamp(12px, 1vw, 16px);
   background: var(--glass-background);
