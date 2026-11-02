@@ -62,7 +62,7 @@
                     }
 
                     if (data.success) {
-                        window.location.href = data.redirect || '/public/employee';
+                        window.location.href = data.redirect || '/employee';
                     } else {
                         showError(data.message || 'Login failed.', res.status === 401);
                     }

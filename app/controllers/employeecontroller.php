@@ -103,7 +103,7 @@ class employeeController
             $this->respond([
                 'success'  => true,
                 'message'  => 'Login successful.',
-                'redirect' => '/public/employee'
+                'redirect' => '/employee'
             ]);
         } catch (Throwable $e) {
             $this->respond(['success' => false, 'message' => $e->getMessage()], 400);
