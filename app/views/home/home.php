@@ -28,7 +28,7 @@
     <?php include __DIR__. '/../components/nav.php'; ?>
     <main>
       <h1 class="hero-title">
-        JAWLAH<span class="dot-accent">.</span>
+        JAWLAH hh<span class="dot-accent">.</span>
       </h1>
       <img class="mountain-img" src="/public/assets/Images/Mountain.webp" alt="Mountain" loading="lazy">
       <div class="cta-wrapper">
