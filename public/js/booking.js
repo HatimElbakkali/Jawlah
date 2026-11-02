@@ -581,7 +581,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       if (!state.selectedTime) {
-        showToast("Please select a valid time slot.");
+        showToast("Not enough capacity available.");
         return;
       }
 
