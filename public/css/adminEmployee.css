@@ -1,0 +1,147 @@
+        @font-face {
+            font-family: 'Andalus';
+            src: url('/public/assets/Fonts/Andalus.woff2') format('woff2');
+            font-display: swap;
+        }
+
+        :root {
+            --bg: #b2ae85;
+            --card-bg: rgba(255, 255, 255, 0.10);
+            --card-border: rgba(255, 255, 255, 0.28);
+            --input-bg: #ccc9b3;
+            --input-border: rgba(255, 255, 255, 0.45);
+            --text: #231709;
+            --gold: #9c8a50;
+            --button: #2a1a0b;
+            --error-bg: #bc9f87;
+            --error-border: #c58f7e;
+            --error-text: #b3261e;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem 1rem;
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+        }
+
+        .login-logo {
+            display: block;
+            width: 130px;
+            max-width: 40%;
+            height: auto;
+            margin-bottom: 1.25rem;
+        }
+
+        .login-title {
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-family: 'Andalus', Georgia, 'Times New Roman', serif;
+            font-size: clamp(1.25rem, 3vw, 1.6rem);
+            font-weight: 400;
+            line-height: 1.2;
+        }
+        .login-title span { color: var(--gold); }
+
+        .login-card {
+            width: 100%;
+            max-width: 380px;
+            padding: 1.6rem 1.6rem 1.5rem;
+            border-radius: 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            box-shadow: 0 8px 24px rgba(35, 23, 9, 0.06);
+        }
+
+        .error {
+            display: none;
+            margin-bottom: 1rem;
+            padding: 0.7rem 0.85rem;
+            border-radius: 10px;
+            background: var(--error-bg);
+            border: 1px solid var(--error-border);
+            color: var(--error-text);
+            font-size: 0.85rem;
+        }
+        .error.show { display: block; }
+
+        .field { margin-bottom: 1.1rem; }
+
+        label {
+            display: block;
+            margin-bottom: 0.4rem;
+            font-size: 0.88rem;
+            font-weight: 600;
+        }
+
+        .input-wrap { position: relative; }
+
+        input {
+            width: 100%;
+            height: 44px;
+            padding: 0 0.9rem;
+            border-radius: 10px;
+            border: 1px solid var(--input-border);
+            background: var(--input-bg);
+            color: var(--text);
+            font-family: inherit;
+            font-size: 0.92rem;
+            transition: border-color 0.15s, box-shadow 0.15s;
+        }
+        input:focus {
+            outline: none;
+            border-color: rgba(35, 23, 9, 0.55);
+            box-shadow: 0 0 0 3px rgba(35, 23, 9, 0.10);
+        }
+        input.invalid { border-color: var(--error-text); }
+
+        .input-wrap input { padding-right: 2.6rem; }
+
+        .toggle-pass {
+            position: absolute;
+            top: 50%;
+            right: 0.55rem;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border: 0;
+            background: transparent;
+            color: var(--text);
+            cursor: pointer;
+        }
+        .toggle-pass svg { width: 18px; height: 18px; }
+        .toggle-pass .icon-hide { display: none; }
+        .toggle-pass.showing .icon-show { display: none; }
+        .toggle-pass.showing .icon-hide { display: block; }
+
+        .btn-submit {
+            width: 100%;
+            height: 46px;
+            margin-top: 0.3rem;
+            border: 0;
+            border-radius: 10px;
+            background: var(--button);
+            color: #f5f2e8;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.1s, opacity 0.15s;
+        }
+        .btn-submit:hover { opacity: 0.92; }
+        .btn-submit:active { transform: translateY(1px); }
+        .btn-submit:disabled { opacity: 0.6; cursor: wait; }
+
+        @media (max-width: 480px) {
+            .login-card { padding: 1.3rem 1.1rem; border-radius: 18px; }
+        }

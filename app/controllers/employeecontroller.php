@@ -72,7 +72,7 @@ class employeeController
             exit;
         }
 
-        require __DIR__ . '/../views/EmployeeDashboard/employeeLogin.php';
+        require __DIR__ . '/../../authentication/AdminEmployee.php';
     }
 
     public function login(): void
@@ -147,7 +147,7 @@ class employeeController
 
             $allBookings = $this->employeeModel->searchBookings($q, $type, $status, $date);
 
-            $viewPath = __DIR__ . '/../views/EmployeeDashboard/partial/employeebookingrows.php';
+            $viewPath = __DIR__ . '/../views/EmployeeDashboard/partial/employeeBookingrows.php';
             if (!is_file($viewPath)) {
                 throw new RuntimeException('View not found: ' . $viewPath);
             }

@@ -187,7 +187,7 @@ switch ($uri) {
 
     case '/login':
     case '/connexion':
-        require __DIR__ . '/../authentication/connexion.php';
+        require __DIR__ . '/../authentication/AdminLogin.php';
         break;
 
     default:

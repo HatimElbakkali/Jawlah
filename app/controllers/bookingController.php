@@ -176,8 +176,6 @@ class bookingController
                 throw new Exception("Failed to record booking. Please try again.");
             }
 
-            // Send confirmation email using the SAME code saved in the DB.
-            // A failed email must never cancel a booking that is already saved.
             try {
                 $itemName = $item['name']
                     ?? $item['title']

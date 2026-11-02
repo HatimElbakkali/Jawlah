@@ -632,7 +632,6 @@ document.addEventListener("DOMContentLoaded", () => {
           elements.modalPayMethod.textContent = "Credit Card";
         }
 
-        // Booking reference code returned by the server (JWL-XXXXXX)
         if (elements.modalRefCode && result.code) {
           elements.modalRefCode.textContent = result.code;
         }

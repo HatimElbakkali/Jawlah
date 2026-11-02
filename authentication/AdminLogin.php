@@ -19,7 +19,7 @@
         href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Amiri+Quran&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="/public/css/connexion.css">
+    <link rel="stylesheet" href="/public/css/AdminLogin.css">
 </head>
 
 <body>
@@ -28,7 +28,7 @@
             <a href="/public/home.php">
                 <img src="/public/assets/Logo/Jawlah.webp" alt="JAWLAH Logo" class="auth-logo">
             </a>
-            <h1 class="auth-title">Sign in to manage <span class="name-brand">JAWLAH</span><span class="dot">.</span></h1>
+            <h1 class="login-title">Welcome back, <span>Manager</span>.</h1>
         </div>
         <div class="auth-card">
             <div id="errorBanner" class="error-banner"></div>
@@ -59,6 +59,7 @@
             </form>
         </div>
     </div>
-    <script src="/public/js/connexion.js"></script>
+    <script src="/public/js/adminLogin.js"></script>
 </body>
+
 </html>
