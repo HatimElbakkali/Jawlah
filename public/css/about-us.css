@@ -125,7 +125,6 @@ sup {
 .main-logo-wrapper {
   margin: 0 2rem;
   border-bottom: 1px black solid;
-
 }
 
 .main-logo {
@@ -239,7 +238,7 @@ sup {
 .testimonials-wrapper {
   display: flex;
   flex-direction: column;
-  margin: clamp(2.5rem, 6vw, 5rem) 0 clamp(2.5rem, 6vw, 5rem) 0;
+  margin: clamp(2.5rem, 6vw, 5rem) 0;
 }
 
 .testimonial-card {
@@ -249,7 +248,7 @@ sup {
 
 .testimonial-quote {
   margin-top: 0.25rem;
-  margin-right: 15rem;
+  margin-right: 0; /* FIX: was 15rem (crushed the text on mobile) */
 }
 
 .testimonial-author {
@@ -572,6 +571,34 @@ sup {
 }
 
 /* =========================================================
+   TESTIMONIALS SECTION LAYOUT (title | clients)
+   ========================================================= */
+.behind-section:has(.testimonials-wrapper) {
+  display: grid;
+  grid-template-columns: minmax(14rem, 1fr) minmax(0, 2fr);
+  column-gap: clamp(13rem, 9vw, 4rem);
+  align-items: start;
+}
+
+.behind-section:has(.testimonials-wrapper) .testimonials-wrapper {
+  margin: 0;
+  padding-block: clamp(2.5rem, 6vw, 5rem);
+  gap: 2.5rem;
+  align-items: flex-start;
+}
+
+.behind-section:has(.testimonials-wrapper) .testimonial-card {
+  width: 100%;
+  max-width: 40rem;
+  min-height: auto;
+}
+
+.behind-section:has(.testimonials-wrapper) .testimonial-quote {
+  text-align: left;
+  margin-right: 15rem; /* desktop only, reset below 1100px */
+}
+
+/* =========================================================
    RESPONSIVE (layout only, sizes are fluid above)
    ========================================================= */
 
@@ -680,6 +707,22 @@ sup {
   .form-label {
     width: min(100%, 25rem);
   }
+
+  /* testimonials: single column */
+  .behind-section:has(.testimonials-wrapper) {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 0;
+  }
+
+  .behind-section:has(.testimonials-wrapper) .testimonials-wrapper {
+    padding-block: 2.5rem;
+  }
+
+  /* FIX: full-width quote text on tablet/phone */
+  .behind-section:has(.testimonials-wrapper) .testimonial-quote {
+    margin-right: 0;
+    padding: 0;
+  }
 }
 
 /* phones */
@@ -716,12 +759,13 @@ sup {
     gap: 40px;
   }
 
+  /* FIX: was padding: 0 4rem 0 1rem (squeezed text to 3-4 chars per line) */
   .testimonial-quote {
-    padding: 0 4rem 0 1rem;
+    padding: 0;
   }
 
   .testimonial-author {
-    margin-left: 1rem;
+    margin-left: 0; /* was 1rem */
   }
 
   .cta-banner {
@@ -735,9 +779,8 @@ sup {
   }
 
   .main-logo-wrapper {
-    margin: 0 0rem;
-    margin-top: 5rem;
-}
+    margin: 5rem 0 0;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -748,40 +791,5 @@ sup {
     transition-duration: 0.01ms !important;
     transition-delay: 0s !important;
     scroll-behavior: auto !important;
-  }
-}
-
-.behind-section:has(.testimonials-wrapper) {
-  display: grid;
-  grid-template-columns: minmax(14rem, 1fr) minmax(0, 2fr); /* titre | clients */
-  column-gap: clamp(13rem, 9vw, 4rem);
-  align-items: start;
-}
-
-.behind-section:has(.testimonials-wrapper) .testimonials-wrapper {
-  margin: 0;
-  padding-block: clamp(2.5rem, 6vw, 5rem);
-  gap: 2.5rem;
-  align-items: flex-start;
-}
-
-.behind-section:has(.testimonials-wrapper) .testimonial-card {
-  width: 100%;
-  max-width: 40rem;
-  min-height: auto;
-}
-
-.behind-section:has(.testimonials-wrapper) .testimonial-quote {
-  text-align: left;
-}
-
-@media (max-width: 1100px) {
-  .behind-section:has(.testimonials-wrapper) {
-    grid-template-columns: minmax(0, 1fr);
-    row-gap: 0;
-  }
-
-  .behind-section:has(.testimonials-wrapper) .testimonials-wrapper {
-    padding-block: 2.5rem;
   }
 }
