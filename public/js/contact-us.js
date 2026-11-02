@@ -45,7 +45,7 @@ form.addEventListener("submit", async (e) => {
 
     if (data.success === true) {
       form.reset();
-      showToast("Thank you! We will get back to you soon.", "success");
+      showToast("Your message has been sent successfully! Our team will get back to you soon.", "success");
     } else {
       showToast(data.message || "Something went wrong.");
     }
