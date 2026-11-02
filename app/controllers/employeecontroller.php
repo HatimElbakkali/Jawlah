@@ -6,7 +6,7 @@ require_once __DIR__ . '/../models/employeemodel.php';
 class employeeController
 {
     private const USERS = [
-        'employee' => 'CHANGE_ME_123',
+        'employee' => 'employee1234',
     ];
 
     private employeeModel $employeeModel;
