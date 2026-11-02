@@ -23,7 +23,7 @@
   --glass-background: linear-gradient(135deg, var(--glass-light), var(--glass-transparent));
   --glass-background-strong: linear-gradient(135deg, var(--glass-light-strong), var(--glass-transparent-strong));
 
-  --shadow-light: rgba(0, 0, 0, 0.2);
+  --shadow-light: rgba(0, 0, 0, 0.311);
   --shadow-navbar: rgba(0, 0, 0, 0.37);
   --shadow-strong: rgba(0, 0, 0, 0.493);
 
@@ -563,9 +563,9 @@ button {
 }
 
 .info-notice-card {
-  /* background: var(--glass-background-strong); */
   border: 1px solid var(--glass-border-light);
   border-radius: var(--radius-md);
+  box-shadow: 0 0 4px var(--shadow-light);
   padding: 1rem 1.25rem;
   display: flex;
   align-items: center;
